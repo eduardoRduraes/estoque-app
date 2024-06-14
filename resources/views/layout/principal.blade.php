@@ -28,7 +28,7 @@
                 Estoque Laravel
             </a>
            <ul class="nav navbar-nav navbar-light">
-               <li><a href="{{action([App\Http\Controllers\ProdutoControler::class, 'lista'])}}" class="navbar-brand">Novo</a></li>
+               <li><a href="{{action([App\Http\Controllers\ProdutoControler::class, 'novo'])}}" class="navbar-brand">Novo</a></li>
                <li><a href="{{action([App\Http\Controllers\ProdutoControler::class, 'lista'])}}" class="navbar-brand">Listagem</a></li>
            </ul>
         </div>

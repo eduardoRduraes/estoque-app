@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\ProdutosRequest;
 use App\Models\Produto;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,22 +30,23 @@ class ProdutoControler extends Controller
         return redirect()->route('lista');
     }
 
-    public function adicionar(Request $req){
-        $produto = new Produto;
-        $produto->nome = $req->nome;
-        $produto->descricao = $req->descricao;
-        $produto->preco = $req->preco;
-        $produto->saldo = $req->saldo;
-        $produto->save();
-        return redirect()->route('lista')->withInput();
+    public function adicionar(ProdutosRequest $req){
+//        $validator = $req->validate([
+//            'nome' => 'required|min:5',
+//            'descricao' => 'required|max:200',
+//            'preco' => 'required|numeric',
+//            'saldo' => 'required|numeric',
+//        ]);
+//
+//        if($validator-> fails()){
+//            return redirect('novo');
+//        }
+        Produto::create($req->all());
+        return redirect()->route('lista')->withInput($req->only('nome'));
     }
     public function atualizar(Request $req){
         $produto = Produto::find($req->id);
-        $produto->nome = $req->nome;
-        $produto->descricao = $req->descricao;
-        $produto->preco = $req->preco;
-        $produto->saldo = $req->saldo;
-        $produto->save();
+        $produto->update($req->all());
         return redirect()->route('lista');
     }
 

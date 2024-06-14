@@ -5,6 +5,15 @@
         @csrf
         @method('POST')
         <h1 class="h4 text-center">Novo Produto</h1>
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="mb-3 form-group">
             <label for="nome" class="form-label">Nome: </label>
             <input id="nome" name="nome" type="text" class="form-control" placeholder="Nome do produto"/>
